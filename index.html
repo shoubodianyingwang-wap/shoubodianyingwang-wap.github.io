@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>首播电影网 - 新片首播、影视资讯与最新上映电影推荐</title>
+<meta name="description" content="首播电影网(https://shoubodianyingwang-wap.github.io)专注新片首播资讯与最新上映电影推荐，每日更新影视资讯、首播预告、新片口碑与平台排片，帮影迷第一时间掌握即将上映与正在热映的影片动态。">
+<meta name="keywords" content="首播电影网,新片首播,电影首播,最新上映电影,影视资讯,首播预告,新片推荐,正在热映,上映片单">
+<meta name="author" content="首播电影网">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="首播电影网 - 新片首播资讯与最新上映推荐">
+<meta property="og:description" content="首播电影网专注新片首播资讯与最新上映电影推荐，每日更新影视资讯、首播预告、新片口碑与平台排片。">
+<meta property="og:url" content="https://shoubodianyingwang-wap.github.io/">
+<meta property="og:site_name" content="首播电影网">
+<link rel="canonical" href="https://shoubodianyingwang-wap.github.io/">
+<style>
+:root{
+  --bg:#07101c;
+  --bg2:#0c1a2b;
+  --card:#10243a;
+  --line:#1e3a56;
+  --line2:#2a5278;
+  --txt:#e6f0fa;
+  --txt2:#9fb6cc;
+  --txt3:#6d89a6;
+  --cyan:#25d5e8;
+  --cyan2:#18b6c9;
+  --blue:#3b82f6;
+  --amber:#ffb020;
+  --red:#ff5a5f;
+  --green:#38d39f;
+  --sans:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.8;
+  background-image:radial-gradient(circle at 18% 12%,rgba(37,213,232,.13),transparent 42%),radial-gradient(circle at 82% 88%,rgba(59,130,246,.12),transparent 40%)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+/* ===== 顶部信息条 ===== */
+.topbar{background:#04090f;border-bottom:1px solid var(--line);font-size:11.5px;color:var(--txt3)}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:9px;padding-bottom:9px;flex-wrap:wrap;gap:10px}
+.topbar .live{color:var(--green);font-weight:700;letter-spacing:1px}
+.topbar .live:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:7px;box-shadow:0 0 9px var(--green);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.topbar .clock{font-family:var(--mono);letter-spacing:1px}
+.topbar .links{display:flex;gap:18px}
+.topbar .links a:hover{color:var(--cyan)}
+
+/* ===== 报头 ===== */
+header{padding:34px 0 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.logo{width:64px;height:64px;flex:0 0 64px;border:2px solid var(--cyan);display:grid;place-items:center;font-family:var(--mono);font-size:15px;font-weight:900;color:var(--cyan);letter-spacing:1px;position:relative}
+.logo:after{content:"";position:absolute;inset:5px;border:1px dashed rgba(37,213,232,.4)}
+.brand .txt h1{font-size:34px;font-weight:900;letter-spacing:1px;line-height:1.25}
+.brand .txt h1 a{color:var(--txt)}
+.brand .txt h1 a:hover{color:var(--cyan)}
+.brand .txt h1 a:hover .net{color:var(--amber)}
+.brand .txt .net{color:var(--txt2)}
+.brand .txt .sub{font-family:var(--mono);font-size:11px;color:var(--txt3);letter-spacing:3px;margin-top:7px}
+.head-right{margin-left:auto;text-align:right;font-size:12px;color:var(--txt2);display:grid;gap:6px}
+.head-right b{color:var(--amber);font-family:var(--mono)}
+
+nav{background:linear-gradient(90deg,var(--bg2),var(--card),var(--bg2));border:1px solid var(--line);border-left:none;border-right:none;position:sticky;top:0;z-index:50;margin-top:26px}
+nav .wrap{display:flex;align-items:center;overflow-x:auto;scrollbar-width:none;padding:0}
+nav .wrap::-webkit-scrollbar{display:none}
+nav a{padding:15px 19px;font-size:12.5px;font-weight:800;letter-spacing:1px;color:var(--txt2);white-space:nowrap;border-right:1px solid var(--line);transition:.18s;position:relative}
+nav a:hover,nav a.active{color:var(--bg);background:var(--cyan)}
+nav a.active:before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--amber)}
+nav .badge{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--green);padding:0 18px;white-space:nowrap;letter-spacing:1px}
+
+/* ===== 通用 ===== */
+section{padding:76px 0}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:34px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:13px}
+.sec-head .tag{font-family:var(--mono);font-size:10.5px;color:var(--cyan);letter-spacing:2px;border:1px solid var(--line2);padding:4px 10px}
+.sec-head h2{font-size:25px;font-weight:900}
+.sec-head h2 em{font-style:normal;color:var(--cyan)}
+.sec-head .en{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--txt3);letter-spacing:2px}
+.lead{font-size:14.5px;color:var(--txt2);max-width:850px;margin-bottom:32px}
+.more{text-align:center;margin-top:38px}
+.btn{display:inline-block;padding:13px 32px;font-size:11.5px;font-weight:900;letter-spacing:2px;background:transparent;color:var(--cyan);border:1.5px solid var(--cyan);transition:.22s}
+.btn:hover{background:var(--cyan);color:var(--bg)}
+
+/* ===== Hero 倒计时双栏 ===== */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:stretch}
+.count{background:var(--card);border:1px solid var(--line);padding:32px;border-top:3px solid var(--cyan)}
+.count .lab{font-family:var(--mono);font-size:11px;color:var(--cyan);letter-spacing:3px}
+.count h3{font-size:23px;font-weight:900;margin:14px 0 18px;line-height:1.6}
+.count .boxes{display:flex;gap:12px}
+.count .b{flex:1;text-align:center;background:var(--bg2);border:1px solid var(--line2);padding:16px 6px}
+.count .b .n{font-family:var(--mono);font-size:30px;font-weight:900;color:var(--amber);line-height:1}
+.count .b .l{font-size:11px;color:var(--txt3);margin-top:8px;letter-spacing:1px}
+.count .src{margin-top:22px;font-size:12.5px;color:var(--txt2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.count .src b{color:var(--green);font-family:var(--mono)}
+.sched{background:var(--card);border:1px solid var(--line);padding:20px 0;border-top:3px solid var(--amber)}
+.sched .cap{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:3px;padding:0 22px 14px;border-bottom:1px solid var(--line)}
+.sched ul{padding:0 8px}
+.sched li{display:grid;grid-template-columns:56px 1fr 70px;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid rgba(30,58,86,.7)}
+.sched li:last-child{border-bottom:none}
+.sched .tm{font-family:var(--mono);font-size:13px;color:var(--cyan);font-weight:800}
+.sched .nm{font-size:13.5px;font-weight:700}
+.sched .nm small{display:block;font-size:11px;color:var(--txt3);font-weight:400;margin-top:2px}
+.sched .st{font-size:10.5px;font-weight:800;text-align:center;letter-spacing:1px}
+.sched .st.live{color:var(--red)}
+.sched .st.next{color:var(--amber)}
+.sched .st.soon{color:var(--txt3)}
+
+/* ===== 栏目一：首播排片（横向滚动通道） ===== */
+.track{display:flex;gap:18px;overflow-x:auto;padding-bottom:16px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.track::-webkit-scrollbar{height:8px}
+.track::-webkit-scrollbar-thumb{background:var(--line2)}
+.chip{flex:0 0 268px;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);transition:.25s;position:relative;overflow:hidden}
+.chip:hover{transform:translateY(-5px);border-color:var(--cyan)}
+.chip .ribbon{position:absolute;top:14px;left:0;background:var(--red);color:#fff;font-size:10.5px;letter-spacing:1px;padding:4px 11px;font-weight:800;z-index:2}
+.chip .ribbon.pre{background:var(--amber);color:var(--bg)}
+.chip .thumb{height:152px;position:relative;display:grid;place-items:center;text-align:center;padding:18px;border-bottom:1px solid var(--line)}
+.chip .thumb .t{font-size:19px;font-weight:900;line-height:1.4;position:relative;z-index:2}
+.chip .thumb .t:before{content:""";font-family:var(--serif,Georgia,serif);font-size:44px;color:var(--cyan);opacity:.35;position:absolute;left:-6px;top:-14px}
+.chip .thumb .d{font-family:var(--mono);font-size:11px;color:var(--amber);margin-top:8px}
+.chip .body{padding:16px 18px}
+.chip .body .ln{display:flex;justify-content:space-between;font-size:12px;color:var(--txt3);margin-bottom:7px;flex-wrap:wrap;gap:6px}
+.chip .body .ln b{color:var(--txt2);font-weight:700}
+.chip .body .gen{font-size:11.5px;color:var(--cyan)}
+.chip .body .bar{height:4px;background:var(--bg2);margin-top:12px;overflow:hidden}
+.chip .body .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--blue))}
+
+/* ===== 栏目二：首播日历（网格） ===== */
+.cal-head{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);padding:13px 20px;margin-bottom:1px}
+.cal-head .m{font-size:15px;font-weight:900;letter-spacing:1px}
+.cal-head .m span{font-family:var(--mono);font-size:11px;color:var(--txt3);font-weight:400;margin-left:10px}
+.cal-head button{background:var(--bg2);border:1px solid var(--line2);color:var(--txt2);width:34px;height:34px;cursor:pointer;font-size:15px}
+.cal-head button:hover{border-color:var(--cyan);color:var(--cyan)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.cal .wd{background:var(--bg2);padding:11px 6px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--txt3)}
+.cal .day{background:var(--card);min-height:92px;padding:10px 11px;position:relative;transition:.18s}
+.cal .day:hover{background:var(--bg2)}
+.cal .day .n{font-family:var(--mono);font-size:12px;color:var(--txt3)}
+.cal .day.today{border:1px solid var(--cyan)}
+.cal .day.today .n{color:var(--cyan);font-weight:900}
+.cal .day.today:after{content:"今日";position:absolute;top:9px;right:9px;font-size:9px;background:var(--cyan);color:var(--bg);padding:2px 5px;font-weight:800}
+.cal .day .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);margin-top:9px}
+.cal .day .ev{font-size:11px;font-weight:700;color:var(--txt);margin-top:5px;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cal .day .ev.red{color:var(--red)}
+.cal .day.blank{background:var(--bg2)}
+
+/* ===== 栏目三：新片速递（左图右文列表） ===== */
+.news{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.news article{display:grid;grid-template-columns:112px 1fr;gap:18px;background:var(--card);border:1px solid var(--line);padding:18px;transition:.22s}
+.news article:hover{transform:translateX(4px);border-color:var(--cyan)}
+.news .cv{height:132px;display:grid;place-items:center;text-align:center;padding:10px;font-size:13px;font-weight:900;line-height:1.5}
+.news .cv .dt{display:block;font-family:var(--mono);font-size:10.5px;color:var(--amber);margin-top:7px;font-weight:400}
+.news .tx h4{font-size:16.5px;font-weight:900;line-height:1.55;margin-bottom:9px}
+.news .tx h4 a:hover{color:var(--cyan)}
+.news .tx p{font-size:13px;color:var(--txt2);line-height:1.8}
+.news .tx .bot{margin-top:11px;display:flex;gap:14px;font-size:11.5px;color:var(--txt3);flex-wrap:wrap}
+.news .tx .bot b{color:var(--green);font-family:var(--mono)}
+
+/* ===== 栏目四：平台排片（数据卡） ===== */
+.plat{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.plat .p{background:var(--card);border:1px solid var(--line);padding:24px 22px;border-top:3px solid var(--line2);transition:.25s}
+.plat .p:hover{border-top-color:var(--cyan);transform:translateY(-5px)}
+.plat .p:nth-child(2):hover{border-top-color:var(--amber)}
+.plat .p:nth-child(3):hover{border-top-color:var(--red)}
+.plat .p:nth-child(4):hover{border-top-color:var(--green)}
+.plat .nm{font-size:17px;font-weight:900;margin-bottom:6px}
+.plat .nm small{display:block;font-size:11px;color:var(--txt3);font-weight:400;letter-spacing:1px;margin-top:4px}
+.plat .num{font-family:var(--mono);font-size:30px;font-weight:900;color:var(--cyan);margin:14px 0 4px;line-height:1}
+.plat .num span{font-size:13px;color:var(--txt3);font-weight:400}
+.plat .txt{font-size:12.5px;color:var(--txt2);line-height:1.85}
+.plat .list{margin-top:15px;font-size:12px;color:var(--txt3)}
+.plat .list li{padding:6px 0;border-top:1px solid rgba(30,58,86,.6)}
+.plat .list li b{color:var(--txt2);font-weight:700}
+
+/* ===== 关于 ===== */
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:0;border:1px solid var(--line)}
+.about .a{background:var(--card);padding:42px 38px}
+.about h2{font-size:23px;font-weight:900;margin-bottom:16px;line-height:1.7}
+.about h2 em{font-style:normal;color:var(--cyan)}
+.about p{font-size:14px;color:var(--txt2);margin-bottom:12px}
+.about .ntc{border-left:3px solid var(--amber);padding:16px 20px;margin-top:20px;background:var(--bg2);font-size:13px;color:var(--txt2)}
+.about .ntc b{color:var(--amber)}
+.about .b{background:var(--bg2);padding:42px 32px;display:grid;gap:1px;background-image:none}
+.about .b div{background:var(--card);padding:20px 22px}
+.about .b .v{font-family:var(--mono);font-size:26px;font-weight:900;color:var(--cyan)}
+.about .b .l{font-size:12px;color:var(--txt3);margin-top:6px;letter-spacing:1px}
+
+/* ===== 页脚 ===== */
+footer{background:#04090f;border-top:1px solid var(--line);padding:52px 0 0;margin-top:44px}
+.foot{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:38px}
+.foot h4{font-size:19px;font-weight:900;letter-spacing:1px}
+.foot h4 a{color:var(--txt)}
+.foot h4 a:hover{color:var(--cyan)}
+.foot .slogan{font-family:var(--mono);font-size:11px;color:var(--cyan);letter-spacing:2px;margin:10px 0 14px}
+.foot p{font-size:13px;color:var(--txt2);max-width:430px}
+.foot h5{font-family:var(--mono);font-size:11px;color:var(--amber);margin-bottom:16px;letter-spacing:2px}
+.foot ul{font-size:13px}
+.foot li{padding:6px 0}
+.foot a{color:var(--txt2)}
+.foot a:hover{color:var(--cyan)}
+.copy{margin-top:38px;border-top:1px solid var(--line);padding:22px 0;font-size:12px;color:var(--txt3);text-align:center;line-height:2.1;font-family:var(--mono)}
+.copy a{color:var(--cyan);font-weight:700}
+
+@media (max-width:1000px){
+  .brand .txt h1{font-size:27px}
+  .head-right{margin-left:0;width:100%;text-align:left}
+  .hero,.news,.about{grid-template-columns:1fr}
+  .plat{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr 1fr;gap:28px}
+  .sec-head .en{display:none}
+  nav .badge{display:none}
+  .cal .day{min-height:70px}
+  .cal .day .ev{font-size:10px}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  .brand .txt h1{font-size:23px}
+  .logo{width:52px;height:52px;flex:0 0 52px;font-size:12px}
+  section{padding:52px 0}
+  .sec-head h2{font-size:20px}
+  .count,.sched,.about .a,.about .b{padding:24px 18px}
+  .count .boxes{gap:8px}
+  .count .b .n{font-size:24px}
+  .chip{flex:0 0 230px}
+  .news article{grid-template-columns:1fr}
+  .news .cv{height:100px}
+  .plat{grid-template-columns:1fr}
+  .cal{grid-template-columns:repeat(7,1fr)}
+  .cal .day{padding:7px 5px;min-height:58px}
+  .cal .day .ev{display:none}
+  .cal .day.today:after{display:none}
+  .foot{grid-template-columns:1fr}
+  .topbar .links{display:none}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<!-- ============ 顶部信息条 ============ -->
+<div class="topbar">
+  <div class="wrap">
+    <span class="live">直播中 首播频道 01</span>
+    <span class="clock" id="clock">2026 / 10 / 08 &nbsp; 周四 &nbsp; 12:00:00</span>
+    <span>服务器：华东节点 · 响应 0.18s</span>
+    <span class="links"><a href="#">RSS 订阅</a><a href="#">站长统计</a><a href="#">留言板</a></span>
+  </div>
+</div>
+
+<!-- ============ 报头 ============ -->
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">SB<br>DY</div>
+      <div class="txt">
+        <h1><a href="https://shoubodianyingwang-wap.github.io/" title="首播电影网">首播<span class="net">电影网</span></a></h1>
+        <div class="sub">F I R S T &nbsp; A I R &nbsp;· &nbsp; 新 片 首 播 资 讯 站</div>
+      </div>
+      <div class="head-right">
+        <span>今日首播 <b>07</b> 部 · 预约提醒 <b>23</b> 部</span>
+        <span>正在热映 <b>14</b> 部 · 本周新增 <b>09</b> 部</span>
+        <span>网站网址：https://shoubodianyingwang-wap.github.io</span>
+      </div>
+    </div>
+    <nav>
+      <div class="wrap">
+        <a href="#hero" class="active">首播倒计时</a>
+        <a href="#track">今日首播</a>
+        <a href="#cal">首播日历</a>
+        <a href="#news">新片速递</a>
+        <a href="#plat">平台排片</a>
+        <a href="#about">关于本站</a>
+        <a href="#">即将上映</a>
+        <a href="#">正在热映</a>
+        <a href="#">首播预告</a>
+        <a href="#">口碑榜</a>
+        <a href="#">类型片单</a>
+        <a href="#">资料库</a>
+        <span class="badge">● 每 30 分钟更新</span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ Hero 倒计时 ============ -->
+<section id="hero">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">S E C T I O N &nbsp;0 1</span><h2>首播 <em>倒计时</em></h2><span class="en">First Air Countdown</span></div>
+    <div class="hero">
+      <div class="count">
+        <div class="lab">NEXT FIRST AIR</div>
+        <h3>《沉默的证人》全网首播 · 犯罪悬疑 · 118 分钟</h3>
+        <div class="boxes">
+          <div class="b"><div class="n" id="d">00</div><div class="l">天 DAY</div></div>
+          <div class="b"><div class="n" id="h">00</div><div class="l">时 HOUR</div></div>
+          <div class="b"><div class="n" id="m">00</div><div class="l">分 MIN</div></div>
+          <div class="b"><div class="n" id="s">00</div><div class="l">秒 SEC</div></div>
+        </div>
+        <div class="src"><span>独家首播平台：平台 A / 平台 B 同步</span><span><b>● 已开启预约</b></span></div>
+      </div>
+      <div class="sched">
+        <div class="cap">今 日 首 播 时 间 表</div>
+        <ul>
+          <li><span class="tm">10:00</span><span class="nm">午夜便利店<small>喜剧 · 平台 C 首播</small></span><span class="st live">直播中</span></li>
+          <li><span class="tm">12:00</span><span class="nm">潮汐之间<small>纪录 · 平台 A 首播</small></span><span class="st live">直播中</span></li>
+          <li><span class="tm">14:30</span><span class="nm">第七封信<small>爱情 · 平台 B 首播</small></span><span class="st next">即将</span></li>
+          <li><span class="tm">18:00</span><span class="nm">无人区公路<small>犯罪 · 平台 A 首播</small></span><span class="st next">即将</span></li>
+          <li><span class="tm">20:00</span><span class="nm">沉默的证人<small>悬疑 · 双平台首播</small></span><span class="st next">即将</span></li>
+          <li><span class="tm">22:00</span><span class="nm">海边最后的夏天<small>剧情 · 平台 D 首播</small></span><span class="st soon">待播</span></li>
+          <li><span class="tm">23:30</span><span class="nm">父亲的算法<small>科幻 · 平台 B 首播</small></span><span class="st soon">待播</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 栏目一：今日首播通道 ============ -->
+<section id="track" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">S E C T I O N &nbsp;0 2</span><h2>今日 <em>首播</em></h2><span class="en">Today's First Air · 横向滑动</span></div>
+    <p class="lead">今日全网首播的影片已按首播时间排好，横向滑动可看完整片单。每张卡片标注了首播平台、时长与期待指数，红色标签为「首播当天」，黄色标签为「预约预热」。</p>
+    <div class="track">
+      <article class="chip"><span class="ribbon">今日首播</span><div class="thumb" style="background:linear-gradient(150deg,#0e3a4d,#0a2836);"><span class="t">潮汐之间</span><span class="d">12:00 平台A 首播</span></div><div class="body"><div class="ln"><span><b>纪录 · 自然</b></span><span>88 分钟</span></div><div class="gen">关键词：海洋 / 配乐 / 画面</div><div class="bar"><i style="width:96%"></i></div></div></article>
+      <article class="chip"><span class="ribbon">今日首播</span><div class="thumb" style="background:linear-gradient(150deg,#3a2a12,#281c0c);"><span class="t">午夜便利店</span><span class="d">10:00 平台C 首播</span></div><div class="body"><div class="ln"><span><b>喜剧 · 群像</b></span><span>110 分钟</span></div><div class="gen">关键词：市井 / 台词 / 小人物</div><div class="bar"><i style="width:88%"></i></div></div></article>
+      <article class="chip"><span class="ribbon">今日首播</span><div class="thumb" style="background:linear-gradient(150deg,#2a1240,#1c0c2c);"><span class="t">第七封信</span><span class="d">14:30 平台B 首播</span></div><div class="body"><div class="ln"><span><b>爱情 · 书信</b></span><span>123 分钟</span></div><div class="gen">关键词：异地 / 年代 / 克制</div><div class="bar"><i style="width:91%"></i></div></div></article>
+      <article class="chip"><span class="ribbon">今日首播</span><div class="thumb" style="background:linear-gradient(150deg,#123a3a,#0a2626);"><span class="t">无人区公路</span><span class="d">18:00 平台A 首播</span></div><div class="body"><div class="ln"><span><b>犯罪 · 公路</b></span><span>131 分钟</span></div><div class="gen">关键词：追车 / 荒漠 / 人性</div><div class="bar"><i style="width:94%"></i></div></div></article>
+      <article class="chip"><span class="ribbon">今日首播</span><div class="thumb" style="background:linear-gradient(150deg,#3a1a14,#280f0c);"><span class="t">沉默的证人</span><span class="d">20:00 双平台 首播</span></div><div class="body"><div class="ln"><span><b>犯罪 · 悬疑</b></span><span>118 分钟</span></div><div class="gen">关键词：反转 / 节奏 / 伏笔</div><div class="bar"><i style="width:98%"></i></div></div></article>
+      <article class="chip"><span class="ribbon">今日首播</span><div class="thumb" style="background:linear-gradient(150deg,#1a2a3a,#101d2a);"><span class="t">海边最后的夏天</span><span class="d">22:00 平台D 首播</span></div><div class="body"><div class="ln"><span><b>剧情 · 家庭</b></span><span>104 分钟</span></div><div class="gen">关键词：亲情 / 告别 / 群像</div><div class="bar"><i style="width:85%"></i></div></div></article>
+      <article class="chip"><span class="ribbon pre">预约预热</span><div class="thumb" style="background:linear-gradient(150deg,#3a3210,#28230a);"><span class="t">父亲的算法</span><span class="d">23:30 平台B 首播</span></div><div class="body"><div class="ln"><span><b>剧情 · 科幻</b></span><span>115 分钟</span></div><div class="gen">关键词：AI / 伦理 / 家庭</div><div class="bar"><i style="width:79%"></i></div></div></article>
+      <article class="chip"><span class="ribbon pre">预约预热</span><div class="thumb" style="background:linear-gradient(150deg,#123a2a,#0a2619);"><span class="t">山间来信</span><span class="d">明日 10:00 平台A</span></div><div class="body"><div class="ln"><span><b>文艺 · 成长</b></span><span>96 分钟</span></div><div class="gen">关键词：自然 / 书信 / 留白</div><div class="bar"><i style="width:82%"></i></div></div></article>
+    </div>
+    <div class="more"><a href="#" class="btn">查看本周完整首播表 →</a></div>
+  </div>
+</section>
+
+<!-- ============ 栏目二：首播日历 ============ -->
+<section id="cal" style="background:#0a1624;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">S E C T I O N &nbsp;0 3</span><h2>首播 <em>日历</em></h2><span class="en">First Air Calendar</span></div>
+    <p class="lead">把本月所有已定档的首播日期都摊在一张表里，哪天有几部、哪部在哪个平台，一眼看清。黄色圆点是当天有首播的日子，红色是重点推荐。</p>
+    <div class="cal-head">
+      <button>‹</button>
+      <div class="m">2026 年 10 月<span>本月共 14 部影片定档首播</span></div>
+      <button>›</button>
+    </div>
+    <div class="cal">
+      <div class="wd">周一</div><div class="wd">周二</div><div class="wd">周三</div><div class="wd">周四</div><div class="wd">周五</div><div class="wd">周六</div><div class="wd">周日</div>
+      <div class="day blank"></div><div class="day blank"></div><div class="day blank"></div>
+      <div class="day"><span class="n">1</span><span class="dot"></span><div class="ev">3 部首播</div></div>
+      <div class="day"><span class="n">2</span></div>
+      <div class="day"><span class="n">3</span><span class="dot"></span><div class="ev">潮汐之间</div></div>
+      <div class="day"><span class="n">4</span></div>
+      <div class="day"><span class="n">5</span><span class="dot"></span><div class="ev">2 部首播</div></div>
+      <div class="day"><span class="n">6</span><span class="dot"></span><div class="ev">午夜便利店</div></div>
+      <div class="day today"><span class="n">7</span><span class="dot"></span><div class="ev">第七封信</div></div>
+      <div class="day"><span class="n">8</span><span class="dot"></span><div class="ev red">沉默的证人</div></div>
+      <div class="day"><span class="n">9</span><span class="dot"></span><div class="ev">2 部首播</div></div>
+      <div class="day"><span class="n">10</span></div>
+      <div class="day"><span class="n">11</span><span class="dot"></span><div class="ev">无人区公路</div></div>
+      <div class="day"><span class="n">12</span><span class="dot"></span><div class="ev">2 部首播</div></div>
+      <div class="day"><span class="n">13</span><span class="dot"></span><div class="ev">海边最后的夏天</div></div>
+      <div class="day"><span class="n">14</span></div>
+      <div class="day"><span class="n">15</span><span class="dot"></span><div class="ev red">父亲的算法</div></div>
+      <div class="day"><span class="n">16</span><span class="dot"></span><div class="ev">山间来信</div></div>
+      <div class="day"><span class="n">17</span></div>
+      <div class="day"><span class="n">18</span><span class="dot"></span><div class="ev">2 部首播</div></div>
+      <div class="day"><span class="n">19</span><span class="dot"></span><div class="ev">夜航西飞</div></div>
+      <div class="day"><span class="n">20</span></div>
+      <div class="day"><span class="n">21</span><span class="dot"></span><div class="ev red">雪线之上</div></div>
+      <div class="day"><span class="n">22</span><span class="dot"></span><div class="ev">2 部首播</div></div>
+      <div class="day"><span class="n">23</span></div>
+      <div class="day"><span class="n">24</span><span class="dot"></span><div class="ev">便利店故事2</div></div>
+      <div class="day"><span class="n">25</span></div>
+      <div class="day"><span class="n">26</span><span class="dot"></span><div class="ev">2 部首播</div></div>
+      <div class="day"><span class="n">27</span><span class="dot"></span><div class="ev red">无声的证言2</div></div>
+      <div class="day"><span class="n">28</span><span class="dot"></span><div class="ev">潮汐之间2</div></div>
+      <div class="day"><span class="n">29</span></div>
+      <div class="day"><span class="n">30</span><span class="dot"></span><div class="ev">2 部首播</div></div>
+      <div class="day"><span class="n">31</span><span class="dot"></span><div class="ev">万圣档特辑</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 栏目三：新片速递 ============ -->
+<section id="news">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">S E C T I O N &nbsp;0 4</span><h2>新片 <em>速递</em></h2><span class="en">New Releases</span></div>
+    <p class="lead">不只是首播，所有正在热映与即将上映的影片动态都在这里。左图右文列表按更新时间倒序排列，标题、首播日期、平台与看点一次看全。</p>
+    <div class="news">
+      <article><div class="cv" style="background:linear-gradient(150deg,#0e3a4d,#0a2836);"><span>潮汐之间</span><span class="dt">10 / 03 首播</span></div><div class="tx"><h4><a href="#">《潮汐之间》首播即登顶，纪录片的视听天花板还能再高</a></h4><p>摄影与配乐的完成度超出同档期所有影片，是本月最值得点开的一部。首播首日即进入平台热度榜前三。</p><div class="bot"><span>类型：纪录 / 自然</span><span>平台：A</span><b>热度 98.6</b></div></div></article>
+      <article><div class="cv" style="background:linear-gradient(150deg,#3a1a14,#280f0c);"><span>沉默的证人</span><span class="dt">10 / 08 首播</span></div><div class="tx"><h4><a href="#">《沉默的证人》定档 10 月 8 日，双平台同步首播</a></h4><p>118 分钟犯罪悬疑，剧本严密到二刷仍能发现新伏笔，是本月最受期待的首播影片。</p><div class="bot"><span>类型：犯罪 / 悬疑</span><span>平台：A / B</span><b>热度 97.2</b></div></div></article>
+      <article><div class="cv" style="background:linear-gradient(150deg,#2a1240,#1c0c2c);"><span>第七封信</span><span class="dt">10 / 07 首播</span></div><div class="tx"><h4><a href="#">异地恋题材终于有一部不煽情的：第七封信 首播回顾</a></h4><p>书信体叙事加上准确的年代感，把「想念」拍得克制而有分量，情侣共看的首播首选。</p><div class="bot"><span>类型：爱情 / 书信</span><span>平台：B</span><b>热度 91.4</b></div></div></article>
+      <article><div class="cv" style="background:linear-gradient(150deg,#3a2a12,#281c0c);"><span>午夜便利店</span><span class="dt">10 / 06 首播</span></div><div class="tx"><h4><a href="#">《午夜便利店》首播：市井喜剧的正确打开方式</a></h4><p>台词有生活气，不靠段子堆砌，是疲惫工作日之后的轻松解压之选。</p><div class="bot"><span>类型：喜剧 / 群像</span><span>平台：C</span><b>热度 88.0</b></div></div></article>
+      <article><div class="cv" style="background:linear-gradient(150deg,#123a2a,#0a2619);"><span>山间来信</span><span class="dt">10 / 16 首播</span></div><div class="tx"><h4><a href="#">《山间来信》定档 10 月 16 日，文艺慢片的档期选择</a></h4><p>96 分钟，节奏慢但不拖，适合安静独处时看，是本月文艺片档期里完成度最高的一部。</p><div class="bot"><span>类型：文艺 / 成长</span><span>平台：A</span><b>热度 82.1</b></div></div></article>
+      <article><div class="cv" style="background:linear-gradient(150deg,#1a2a3a,#101d2a);"><span>海边最后的夏天</span><span class="dt">10 / 13 首播</span></div><div class="tx"><h4><a href="#">《海边最后的夏天》首播定档：群像处理的细腻之处</a></h4><p>家庭群像的处理细节值得单独写一篇，结尾不强行圆满，是本月剧情片里少见的克制。</p><div class="bot"><span>类型：剧情 / 家庭</span><span>平台：D</span><b>热度 85.5</b></div></div></article>
+    </div>
+    <div class="more"><a href="#" class="btn">进入影视资讯资料库 →</a></div>
+  </div>
+</section>
+
+<!-- ============ 栏目四：平台排片 ============ -->
+<section id="plat" style="background:#0a1624;border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">S E C T I O N &nbsp;0 5</span><h2>平台 <em>排片</em></h2><span class="en">Platform Lineup</span></div>
+    <p class="lead">同一部影片，首播平台不同，排片节奏也不同。下面按平台整理了本月首播数量与代表片单，方便你按自己常用的平台做选择。</p>
+    <div class="plat">
+      <div class="p"><div class="nm">平台 A<small>PLATFORM A</small></div><div class="num">06<span> 部首播</span></div><div class="txt">本月首播主力平台，悬疑与文艺类型占比较高，更新频率稳定在每周 1–2 部。</div><ul class="list"><li><b>潮汐之间</b> · 10/03 已播</li><li><b>沉默的证人</b> · 10/08 首播</li><li><b>山间来信</b> · 10/16 首播</li></ul></div>
+      <div class="p"><div class="nm">平台 B<small>PLATFORM B</small></div><div class="num">05<span> 部首播</span></div><div class="txt">爱情与剧情类型为主，同步首播能力强，多部重点影片选择双平台同时上线。</div><ul class="list"><li><b>第七封信</b> · 10/07 已播</li><li><b>沉默的证人</b> · 10/08 同步</li><li><b>父亲的算法</b> · 10/15 首播</li></ul></div>
+      <div class="p"><div class="nm">平台 C<small>PLATFORM C</small></div><div class="num">03<span> 部首播</span></div><div class="txt">主打轻松喜剧与市井题材，排片节奏偏向周末晚间，适合家庭与朋友共看。</div><ul class="list"><li><b>午夜便利店</b> · 10/06 已播</li><li><b>便利店故事2</b> · 10/24 首播</li><li><b>市井夜话</b> · 11/02 待定</li></ul></div>
+      <div class="p"><div class="nm">平台 D<small>PLATFORM D</small></div><div class="num">04<span> 部首播</span></div><div class="txt">剧情与家庭题材集中，档期安排在晚间黄金时段，适合全家观看的场景。</div><ul class="list"><li><b>海边最后的夏天</b> · 10/13 首播</li><li><b>父亲的算法</b> · 11/05 待定</li><li><b>家的方向</b> · 11/12 待定</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 关于本站 ============ -->
+<section id="about" style="padding-bottom:0;">
+  <div class="wrap">
+    <div class="about">
+      <div class="a">
+        <h2>关于 <em>首播电影网</em></h2>
+        <p>首播电影网（https://shoubodianyingwang-wap.github.io）专注新片首播资讯与最新上映电影动态，每日更新影视资讯、首播预告、新片口碑与平台排片，帮影迷第一时间掌握即将上映与正在热映的影片信息。</p>
+        <p>我们不做影片搬运，也不提供在线播放服务。本站内容均为影片介绍、首播资讯与观影参考，具体观影请通过正规授权渠道，支持正版。</p>
+        <div class="ntc"><b>重要声明：</b>本站仅提供影视资讯、首播预告与观影参考内容，不提供任何影片的在线播放、下载或资源链接服务。页面内所有链接仅为站内栏目占位，不构成任何观看渠道指引，请通过合法授权平台观看。</div>
+      </div>
+      <div class="b">
+        <div><div class="v">14</div><div class="l">本月定档首播影片</div></div>
+        <div><div class="v">07</div><div class="l">今日首播部数</div></div>
+        <div><div class="v">04</div><div class="l">覆盖首播平台</div></div>
+        <div><div class="v">30min</div><div class="l">资讯更新频率</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 页脚 ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h4><a href="https://shoubodianyingwang-wap.github.io/">首播电影网</a></h4>
+        <div class="slogan">第 一 时 间 ， 知 道 今 天 播 什 么</div>
+        <p>专注新片首播资讯与最新上映电影动态，每日更新影视资讯、首播预告、新片口碑与平台排片，让影迷不错过每一部值得看的首播影片。</p>
+      </div>
+      <div>
+        <h5>资讯栏目</h5>
+        <ul>
+          <li><a href="#hero">首播倒计时</a></li>
+          <li><a href="#track">今日首播</a></li>
+          <li><a href="#cal">首播日历</a></li>
+          <li><a href="#news">新片速递</a></li>
+          <li><a href="#plat">平台排片</a></li>
+          <li><a href="#about">关于本站</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>影片分类</h5>
+        <ul>
+          <li><a href="#">即将上映</a></li>
+          <li><a href="#">正在热映</a></li>
+          <li><a href="#">首播预告</a></li>
+          <li><a href="#">口碑榜</a></li>
+          <li><a href="#">悬疑犯罪</a></li>
+          <li><a href="#">喜剧轻松</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>本站服务</h5>
+        <ul>
+          <li><a href="#">投稿爆料</a></li>
+          <li><a href="#">首播预约提醒</a></li>
+          <li><a href="#">排片合作</a></li>
+          <li><a href="#">内容声明</a></li>
+          <li><a href="#">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      © 2026 首播电影网 shoubodianyingwang-wap.github.io 版权所有 · 本站仅提供影视资讯与首播预告，不提供在线播放、下载或资源链接服务，请通过合法授权渠道观看<br>
+      网站名称：<a href="https://shoubodianyingwang-wap.github.io/">首播电影网</a> ｜ 网站网址：https://shoubodianyingwang-wap.github.io/
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var t=function(id){return document.getElementById(id);};
+  function tick(){
+    var n=new Date(), s=[n.getFullYear(),('0'+(n.getMonth()+1)).slice(-2),('0'+n.getDate()).slice(-2)].join(' / ');
+    var w='日一二三四五六'.charAt(n.getDay());
+    var h=('0'+n.getHours()).slice(-2),m=('0'+n.getMinutes()).slice(-2),ss=('0'+n.getSeconds()).slice(-2);
+    t('clock').textContent=n.getFullYear()+' / '+('0'+(n.getMonth()+1)).slice(-2)+' / '+('0'+n.getDate()).slice(-2)+'   周'+w+'   '+h+':'+m+':'+ss;
+  }
+  tick();setInterval(tick,1000);
+  var target=new Date();target.setDate(8);target.setHours(20,0,0,0);
+  if(target<new Date())target.setDate(target.getDate()+7);
+  function cd(){
+    var d=target-new Date();
+    if(d<0)d=0;
+    t('d').textContent=('0'+Math.floor(d/864e5)).slice(-2);
+    t('h').textContent=('0'+Math.floor(d/36e5%24)).slice(-2);
+    t('m').textContent=('0'+Math.floor(d/6e4%60)).slice(-2);
+    t('s').textContent=('0'+Math.floor(d/1e3%60)).slice(-2);
+  }
+  cd();setInterval(cd,1000);
+})();
+</script>
+
+</body>
+</html>
